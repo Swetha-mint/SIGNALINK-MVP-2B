@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <title>SIGNALINK MVP-2B — Low-Memory Buffer</title>
+  <link rel="stylesheet" href="style.css?v=20261005-1">
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">SIGNALINK · MVP-2B</p>
+      <h1>LOW-MEMORY BUFFER</h1>
+      <p class="subtitle">A fixed 4-slot event buffer for hardware-aware temporal storage.</p>
+    </header>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">FIXED MEMORY</p>
+          <h2>4 slots only</h2>
+        </div>
+        <div class="capacity" id="capacity">0 / 4</div>
+      </div>
+      <div class="slots" id="slots"></div>
+      <p class="status" id="status" aria-live="polite">Buffer ready.</p>
+    </section>
+
+    <section class="card">
+      <p class="eyebrow">INJECT EVENT</p>
+      <div class="controls">
+        <button data-event="HELLO">HELLO</button>
+        <button data-event="YES">YES</button>
+        <button data-event="STOP">STOP</button>
+        <button id="clear" class="secondary">CLEAR BUFFER</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <p class="eyebrow">MEMORY OPERATION</p>
+        <div class="metric"><span>Total events</span><strong id="totalEvents">0</strong></div>
+        <div class="metric"><span>Evictions</span><strong id="evictions">0</strong></div>
+        <div class="metric"><span>Current occupancy</span><strong id="occupancy">0 / 4</strong></div>
+      </article>
+
+      <article class="card">
+        <p class="eyebrow">LATEST OPERATION</p>
+        <div class="operation" id="operation">Waiting for an event…</div>
+        <p class="small" id="evicted">No value evicted yet.</p>
+      </article>
+    </section>
+
+    <section class="card explanation">
+      <p class="eyebrow">HARDWARE INTERPRETATION</p>
+      <h2>Fixed storage → predictable behavior</h2>
+      <p>
+        Every new gesture event enters the buffer. When all four slots are occupied,
+        the oldest event is removed and the newest event takes the final slot.
+      </p>
+      <div class="flow">NEW EVENT → SHIFT / EVICT OLDEST → STORE NEWEST</div>
+      <p class="small">This prototype models FIFO-style fixed memory behavior before translating the logic into RTL.</p>
+    </section>
+
+    <section class="card">
+      <p class="eyebrow">OPERATION LOG</p>
+      <ol id="log" class="log"><li>Buffer initialized with 4 fixed slots.</li></ol>
+    </section>
+
+    <footer>Fixed memory · FIFO behavior · No camera · No ML</footer>
+  </main>
+  <script src="script.js?v=20261005-1"></script>
+</body>
+</html>
